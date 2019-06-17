@@ -1,0 +1,18 @@
+<div class="filter-container">
+  <div class="search-form">
+    <input
+      id="search"
+      ref="search"
+      type="search"
+      name="search"
+      placeholder="Filter by {{ filterType }}"
+      #filterValue
+    />
+    <button type="submit" (click)="onSearch(filterValue.value)">Search</button>
+  </div>
+  
+  <div class="filter-buttons">
+    <button [ngClass]="{'button-active': filterType === 'name'}" (click)="[onButtonFilter('name'), filterValue ? filterValue.value = '' : null]">Name</button>
+    <button [ngClass]="{'button-active': filterType === 'type'}" (click)="[onButtonFilter('type'), filterValue ? filterValue.value = '' : null]">Type</button>
+  </div>
+</div>

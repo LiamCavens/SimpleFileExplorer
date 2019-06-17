@@ -1,0 +1,30 @@
+<div>
+  <div class="file-container">
+    <li class="file-list" *ngFor="let file of allFiles">
+      <div class="file-list-card" (click)="showChildren(file)" [ngClass]="{'folder': file.type === 'folder'}">
+        <div *ngIf="file.type !== 'folder'" class="card-icon-file">
+          <i class="fas fa-file"></i>
+        </div>
+        <div *ngIf="file.type === 'folder'" class="card-icon-folder">
+          <i class="fas fa-folder-open"></i>
+        </div>
+          <p class="file-list-name">Name: {{ file.name }}</p>
+          <p class="file-list-type">Type: {{ file.type }}</p>
+          <p *ngIf=file.added class="file-list-added">Added: {{ file.added }}</p>
+      </div>
+    </li>
+  </div>
+
+  <div *ngIf="childrenFiles.length > 0" class="file-container children-container">
+    <h2 class="parent-file-name">Files in {{parentFile}}</h2>
+      <li class="file-list" *ngFor="let file of childrenFiles">
+      <div class="file-list-card" (click)="showChildren(file)" [ngClass]="{'folder': file.type === 'folder'}">
+        <div class="card-icon-file">
+          <i class="fas fa-file"></i>
+        </div>
+          <p class="file-list-name">Name: {{ file.name }}</p>
+          <p class="file-list-type">Type: {{ file.type }}</p>
+          <p *ngIf=file.added class="file-list-added">Added: {{ file.added }}</p>
+      </div>
+  </div>
+</div>
