@@ -67,7 +67,7 @@ export class FileExplorerService {
     if (!str) return this.files.next(originalFiles);
     let allFiles = this.getAllFiles();
     const filesWithSimilarName = allFiles.filter(file =>
-      file.name.includes(str)
+      file.name.toLowerCase().includes(str)
     );
 
     this.files.next(filesWithSimilarName);
