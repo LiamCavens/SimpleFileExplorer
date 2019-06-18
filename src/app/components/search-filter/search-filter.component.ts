@@ -8,20 +8,19 @@ import { FileExplorerService } from "../../file-explorer.service";
 })
 export class SearchFilterComponent {
   filterType = "name";
-  sortType = "";
+  sortValue = "ascending";
   constructor(private fileExplorerDataService: FileExplorerService) {}
 
   onButtonFilter(filterSearchType: string) {
     this.filterType = filterSearchType;
-    if (this.sortType = "filter") {
-      this.sortType = "ascending";
-      this.fileExplorerDataService.sortFiles( this.sortType, filterSearchType);
-    }
-    if (this.sortType = "ascending") {
-      this.sortType = "descending";
-    }
-    if (this.sortType = "descending") {
-      this.sortType = "filter";
+  }
+
+  onSortButton(){
+    this.fileExplorerDataService.sortFiles(this.sortValue, this.filterType);
+    if (this.sortValue === 'ascending'){
+      return this.sortValue = 'descending';
+    } else {
+      return this.sortValue = 'ascending';
     }
   }
 

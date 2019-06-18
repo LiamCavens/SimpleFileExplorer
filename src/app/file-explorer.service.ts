@@ -7,7 +7,6 @@ export interface FileData {
   results: { url: string }[];
 }
 
-
 const originalFiles = [
   {
     type: "pdf",
@@ -58,17 +57,15 @@ const originalFiles = [
   }
 ];
 
-
 @Injectable({
   providedIn: "root"
 })
 export class FileExplorerService {
-  
   files = new BehaviorSubject<File[]>(originalFiles);
 
   onNameSearch(str: string) {
     if (!str) return this.files.next(originalFiles);
-    let allFiles = this.getAllFiles();  
+    let allFiles = this.getAllFiles();
     const filesWithSimilarName = allFiles.filter(file =>
       file.name.includes(str)
     );
@@ -83,11 +80,32 @@ export class FileExplorerService {
     this.files.next(filesWithType);
   }
 
-  sortFiles(sortBy: string, type: string){
+  sortFiles(sortBy: string, type: string) {
     let allFiles = this.getAllFiles();
     const sortedFiles = allFiles.sort((a, b) => {
-      return a.type - b.type
-    })
+      if (type === "name") {
+        let nameA = a.name.toUpperCase();
+        let nameB = b.name.toUpperCase();
+        if (nameA < nameB) return sortBy === "ascending" ? 1 : -1;
+        if (nameA > nameB) return sortBy === "ascending" ? -1 : 1;
+        return 0;
+      }
+      if (type === "type") {
+        let typeA = a.type.toUpperCase();
+        let typeB = b.type.toUpperCase();
+        if (typeA < typeB) return sortBy === "ascending" ? 1 : -1;
+        if (typeA > typeB) return sortBy === "ascending" ? -1 : 1;
+        return 0;
+      }
+      if (type === "added") {
+        let addedA = a.added;
+        let addedB = b.added;
+        if (addedA < addedB) return sortBy === "ascending" ? 1 : -1;
+        if (addedA > addedB) return sortBy === "ascending" ? -1 : 1;
+        return 0;
+      }
+    });
+    this.files.next(sortedFiles);
   }
 
   getFiles() {

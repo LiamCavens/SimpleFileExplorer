@@ -15,5 +15,6 @@
     <button [ngClass]="{'button-active': filterType === 'name'}" (click)="[onButtonFilter('name'), filterValue ? filterValue.value = '' : null]">Name</button>
     <button [ngClass]="{'button-active': filterType === 'type'}" (click)="[onButtonFilter('type'), filterValue ? filterValue.value = '' : null]">Type</button>
     <button [ngClass]="{'button-active': filterType === 'added'}" (click)="[onButtonFilter('added'), filterValue ? filterValue.value = '' : null]">Date</button>
+    <button (click)="[onSortButton()]">Sort by {{filterType}}: {{sortValue}}</button>
   </div>
 </div>
