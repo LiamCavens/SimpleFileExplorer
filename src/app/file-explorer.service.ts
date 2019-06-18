@@ -80,9 +80,14 @@ export class FileExplorerService {
     if (!type) return this.files.next(originalFiles);
     let allFiles = this.getAllFiles();
     const filesWithType = allFiles.filter(file => file.type === type);
-    console.log(filesWithType);
-    console.log('tits');
     this.files.next(filesWithType);
+  }
+
+  sortFiles(sortBy: string, type: string){
+    let allFiles = this.getAllFiles();
+    const sortedFiles = allFiles.sort((a, b) => {
+      return a.type - b.type
+    })
   }
 
   getFiles() {

@@ -7,11 +7,22 @@ import { FileExplorerService } from "../../file-explorer.service";
   styleUrls: ["./search-filter.component.less"]
 })
 export class SearchFilterComponent {
-  filterType = 'name';
+  filterType = "name";
+  sortType = "";
   constructor(private fileExplorerDataService: FileExplorerService) {}
 
   onButtonFilter(filterSearchType: string) {
     this.filterType = filterSearchType;
+    if (this.sortType = "filter") {
+      this.sortType = "ascending";
+      this.fileExplorerDataService.sortFiles( this.sortType, filterSearchType);
+    }
+    if (this.sortType = "ascending") {
+      this.sortType = "descending";
+    }
+    if (this.sortType = "descending") {
+      this.sortType = "filter";
+    }
   }
 
   onSearch(filterValue: string) {
